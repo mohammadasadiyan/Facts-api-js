@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="w-50 mx-auto my-3">
+            <h1 class="text-center">Fact Year</h1>
+            <hr>
+        </div>
+        <form class="form-group">
+            <input type="number" name="number" class="form-control" id="num" placeholder="Year . . .">
+            <button class="btn btn-success my-3">Get fact</button>
+        </form>
+        <div id="app">
+
+        </div>
+    </div>
+    <script>
+        let app = document.getElementById("app");
+        const form = document.querySelector("form");
+        async function getYearFact(year="random") {
+            let response = await fetch(`http://numbersapi.com/${year}/year`);
+            let data = await response.text();
+            app.textContent = `${data}`;
+        }
+        form.addEventListener("submit", e=> {
+            e.preventDefault()
+            getYearFact(e.target.number.value)
+        })
+    </script>
+</body>
+</html>
